@@ -1,0 +1,42 @@
+int x=5;
+public class MyJavaLexcal {
+
+    /**
+     * @param args the command line arguments
+     */
+     public static void main(String[] args) throws FileNotFoundException {
+         String jflexPath = "E:\\fourth_year\\411\\compiler\\Abdo\\project\\JflexProject\\myJavaLexcal\\src\\myjavalexcal\\Lexer.flex";
+          generarLexer(jflexPath);
+        
+         try{
+         
+               JavaTokens current;
+               javaScanner scanner;
+         
+              String inputPath = "E:\\fourth_year\\411\\compiler\\Abdo\\project\\JflexProject\\myJavaLexcal\\in.txt";
+              FileReader SourseCode= new FileReader(inputPath);
+              scanner=new javaScanner(SourseCode);
+              current= scanner.nextToken();
+  
+              while(true)
+              {
+                   System.out.println(" token :"+current.toString());
+                   current= scanner.nextToken();
+                  if(current.EndOFFile()==true)break;
+              }
+                 SourseCode.close();
+         
+        }catch(Exception ex)
+        {
+        System.out.println(ex.toString());
+       
+        }
+    
+    }
+         public static void generarLexer(String jflexPath)
+         {
+            File lexcalFile = new File(jflexPath);
+            JFlex.Main.generate(lexcalFile);
+         }
+}
+ 
